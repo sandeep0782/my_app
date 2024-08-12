@@ -1,0 +1,102 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Add OTB</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Add OTB
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="{% if otb %}/change_otb/{{otb.id}}/{% else %}/add_otb/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Brand Name</label>
+                            <select class="form-control" id="brand" name="brand">
+                                <option value = "0">-----------</option>
+                                {% for i in buyer %}
+                                <option value="{{i.id}}"{% if otb.brand.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Season</label>
+                            <select class="form-control" id="season" name="season">
+                                <option value = "0">-----------</option>
+                                {% for i in season %}
+                                <option value="{{i.id}}"{% if otb.season.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Drop</label>
+                            <select class="form-control" id="drop" name="drop">
+                                <option value = "0">-----------</option>
+                                {% for i in drop %}
+                                <option value="{{i.id}}"{% if otb.drop.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Article Type</label>
+                            <select class="form-control" id="article_type" name="article_type">
+                                <option value = "0">-----------</option>
+                                {% for i in article_type %}
+                                <option value="{{i.id}}"{% if otb.article_type.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Total OTB</label>
+                            <input class="form-control" id="amount" name="total_otb"  type="integer" placeholder="Amount" value="{{otb.total_otb}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <div class="form-group">
+                            <label>OTB Consumed</label>
+                            <input class="form-control" id="amount" name="otb_consumed"  type="integer" placeholder="Amount" value="{{otb.otb_consumed}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-md-12">
+                        <div class="form-group">
+                            <label>OTB Baance</label>
+                            <input class="form-control" id="amount" name="otb_balance"  type="integer" placeholder="Amount" value="{{otb.otb_balance}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div> -->
+                </div>
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if otb %}Update OTB{% else %}Add OTB{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

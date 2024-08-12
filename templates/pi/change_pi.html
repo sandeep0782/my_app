@@ -1,0 +1,111 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Add Order</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Add Order
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="{% if order %}/change_order/{{order.id}}/{% else %}/add_order/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Brand Name</label>
+                            <select class="form-control" id="buyer" name="buyer"  >
+                                <option value = "0">-----------</option>
+                                {% for i in buyer %}
+                                <option value="{{i.id}}"{% if order.buyer.id == i.id %}selected{% endif %} >{{i.company}}
+                                </option>
+                                {% endfor %}
+                            </select required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Season</label>
+                            <select class="form-control" id="season" name="season">
+                                <option value = "0">-----------</option>
+                                {% for i in season %}
+                                <option value="{{i.id}}"{% if order.season.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Drop</label>
+                            <select class="form-control" id="drop" name="drop">
+                                <option value = "0">-----------</option>
+                                {% for i in drop %}
+                                <option value="{{i.id}}"{% if order.drop.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Quality</label>
+                            <select  required="required" class="form-control" id="quality" name="quality">
+                                <option value = "0">-----------</option>
+                                {% for i in quality %}
+                                <option value="{{i.id}}"{% if order.quality.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label>Quantity</label>
+                                <input class="form-control" id="quantity" name="quantity"  type="number" min="1" placeholder="Quantity" value="{{order.quantity}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input class="form-control" id="price" name="price"  type="number" min="1" placeholder="Price" value="{{order.price}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                            </div>
+                        </div>
+                    
+    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Delivery Date</label>
+                            <input class="form-control" id="buyer_del_date" name="buyer_del_date"  type="date" placeholder="Deliver Date" value="{{order.buyer_del_date|date:'Y-m-d'}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-12">
+                        <div class="form-group">
+                            <label>OTB Baance</label>
+                            <input class="form-control" id="amount" name="otb_balance"  type="integer" placeholder="Amount" value="{{otb.otb_balance}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div> -->
+                </div>
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if order %}Update Order{% else %}Add Order{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

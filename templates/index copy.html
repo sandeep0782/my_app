@@ -1,0 +1,218 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+</head>
+<main>
+  <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-4">
+      <li class="breadcrumb-item active">Dashboard</li>
+  </ol>
+  <div class="row">
+    <div class="col-xl-2 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">12,097,444</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">Total Inventory</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">60.98%</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">Rate of Sale</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">22.87%</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">Returns</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-6">
+        <div class="card bg-info text-white mb-4">
+            <div class="card-body">11,350,685</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">Under Production</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-6">
+      <div class="card bg-secondary text-white mb-4">
+          <div class="card-body">1100.00</div>
+          <div class="card-footer d-flex align-items-center justify-content-between">
+              <a class="small text-white stretched-link" href="#">Average Sale Price</a>
+              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+          </div>
+      </div>
+  </div>
+  <div class="col-xl-2 col-md-6">
+    <div class="card bg-dark text-white mb-4">
+        <div class="card-body">500.00</div>
+        <div class="card-footer d-flex align-items-center justify-content-between">
+            <a class="small text-white stretched-link" href="#">Average Purchase Price</a>
+            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="card mb-4">
+  <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      Dashboard
+  </div>
+  <div class="card-body">
+      <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                  <tr>
+                      <th>Brand Name</th>
+                      <th>Total Inventory</th>
+                      <th>Quantity Sold</th>
+                      <th>Returns</th>
+                      <th>Under Production</th>
+                      <th>A.S.P</th>
+                      <th>A.P.P</th>
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for i in om %}
+                  <tr>
+                      <td>{{i.brand}}</td>
+                      <td>{{i.total_inventory}}</td>
+                      <td>{{i.total_sale}}</td>
+                      <td>{{i.total_return}}</td>
+                      <td>{{i.under_production}}</td>
+                      <td>{{i.asp}}</td>
+                      <td>{{i.app}}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-chart-bar mr-1"></i>
+            Season-wise Average Purchase Price Comparision Chart
+          </div>
+          <div class="card-body"><canvas id="barChart" width="500%" height="200"></canvas></div>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-chart-bar mr-1"></i>
+            Season-wise Average Sale Price Comparision Chart
+          </div>
+          <div class="card-body"><canvas id="mbarChart" width="500%" height="200"></canvas></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-chart-bar mr-1"></i>
+            Brand-wise Average Purchase Price Comparision Chart
+          </div>
+          <div class="card-body"><canvas id="bsbarChart" width="1100%" height="300"></canvas></div>
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-chart-bar mr-1"></i>
+            Brand-wise Average Sale Price Comparision Chart
+          </div>
+          <div class="card-body"><canvas id="bpbarChart" width="1100%" height="300"></canvas></div>
+        </div>
+      </div>
+    </div>
+    
+    console.log(barChart)
+    <script>
+      var ctx = document.getElementById("barChart").getContext('2d');
+      var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["SS-21", "SS-22", "AW-22", "SS-23"],
+          datasets: [{
+            label: 'Purchase Price',
+            data: [400, 395, 405, 410, 380],
+            backgroundColor: ["red", "blue", "yellow", "green"]
+          }]
+        },
+        options: {
+          responsive: false,
+        }
+      });
+    </script>
+    <script>
+      var ctx = document.getElementById("mbarChart").getContext('2d');
+      var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["SS-21", "SS-22", "AW-22", "SS-23"],
+          datasets: [{
+            label: 'Sale Price',
+            data: [520, 510, 490, 510, 480],
+            backgroundColor: ["red", "blue", "yellow", "green"]
+          }]
+        },
+        options: {
+          responsive: false,
+        }
+      });
+    </script>
+    <script>
+      var ctx = document.getElementById("bsbarChart").getContext('2d');
+      var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["All About You","Anouk", "Chemistry", "Dressberry", "Ether","Harvard","Here&Now","House Of Pataudi", "Hrx By Hrithik Roshan", "Invictus", "Justice", "Killer", "Kook N Keech","Mast & Harbour", "Moda Rapido","Mr. Bowerbird","Nautica","Roadster","Sangria","Slazenger","Sztori","Taavi","Yk"],
+          datasets: [{
+            label: 'Purchase Price',
+            data: [400, 395, 405, 410, 380, 400, 395, 405, 410, 380, 400, 395, 405, 410, 380, 400, 395, 405, 410, 380, 395, 405, 410, 380, 350],
+            backgroundColor: ["red", "blue", "yellow", "green","red", "blue", "yellow", "green","red", "blue", "yellow", "green","red", "blue", "yellow", "green","red", "blue", "yellow", "green","red", "blue", "yellow", "green"]
+          }]
+        },
+        options: {
+          responsive: false,
+        }
+      });
+    </script>
+    <script>
+      var ctx = document.getElementById("bpbarChart").getContext('2d');
+      var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["All About You","Anouk", "Chemistry", "Dressberry", "Ether","Harvard","Here&Now","House Of Pataudi", "Hrx By Hrithik Roshan", "Invictus", "Justice", "Killer", "Kook N Keech","Mast & Harbour", "Moda Rapido","Mr. Bowerbird","Nautica","Roadster","Sangria","Slazenger","Sztori","Taavi","Yk"],
+          datasets: [{
+            label: 'Sale Price',
+            data: [520, 510, 490, 510, 480, 520, 510, 490, 510, 480,520, 510, 490, 510, 480,520, 510, 490, 510, 480,520, 510, 490, 510, 480, 380],
+            backgroundColor: ["red", "blue", "yellow", "green","red", "blue", "yellow", "green","red", "blue", "yellow", "green","red", "blue", "yellow", "green","red", "blue", "yellow", "green","red", "blue", "yellow", "green"]
+          }]
+        },
+        options: {
+          responsive: false,
+        }
+      });
+    </script>
+  </div>
+</main>
+
+{% endblock content %}

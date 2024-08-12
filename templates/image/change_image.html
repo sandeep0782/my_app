@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Process Image</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Process Image
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="{% if image %}/change_image/{{image.id}}/{% else %}/add_image/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Select Image</label>
+                            <input class="form-control" id="image" name="photo"  type="file" placeholder="image" value="" required/>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if image %}Updload Image{% else %}Add Image{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

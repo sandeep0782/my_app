@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Quality Details
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-primary" href="{% url 'add_quality' %}" role="button">New Quality</a>
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- View Quality</title>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Quality Name</th>
+                            <th>Count</th>
+                            <th>Construction</th>
+                            <th>Content</th>
+                            <th>GSM</th>
+                            <th>Width</th>
+                            <th>MOQ</th>
+                            <th>Solid Price</th>
+                            <th>Rotary Price</th>
+                            <th>Digital Price</th>
+                            <th>Lead Time</th>
+                            <th>Remarks</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    {% for i in quality %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.count}}</td>
+                        <td>{{i.construction}}</td>
+                        <td>{{i.content}}</td>
+                        <td>{{i.gsm}}</td>
+                        <td>{{i.width}}</td>
+                        <td>{{i.moq}}</td>
+                        <td>{{i.s_price}}</td>
+                        <td>{{i.r_price}}</td>
+                        <td>{{i.d_price}}</td>
+                        <td>{{i.lead_time}}</td>
+                        <td>{{i.remarks}}</td>
+                        <td>
+                            <a href="/change_quality/{{i.id}}/"><button class="btn btn-success">Edit</button></a>
+                        </td>
+                        <td>
+                            <a href="/delete_quality/{{i.id}}/"><button class="btn btn-danger">Delete</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% for i in messages %}
+<script>
+    alert('{{i}}')
+</script>
+{% endfor %}
+{% endblock content %}

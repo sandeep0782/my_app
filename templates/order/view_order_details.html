@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<main>
+    <div class="container-fluid">
+        <!-- <h1 class="mt-4">Dashboard</h1> -->
+        <ol class="breadcrumb mb-4 mt-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <title>Smart Tracking System- View Order</title>
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-9">
+                        <i class="fas fa-table mr-1"></i>
+                        Order Details
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <a class="btn btn-primary" href="{% url 'book_create' %}" role="button">Add Order</a>
+                    </div>
+                </div>
+            </div> 
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Quality</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>value</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in order_detail %}
+                            <tr>
+                                <td>{{i.id}}</td>
+                                <td>{{i.quality}}</td>
+                                <td>{{i.quantity}}</td>
+                                <td>{{i.price}}</td>
+                                <td>{{i.value}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form> 
+    </div>
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function(){
+        
+        $(".singlecheckbox").click(function(){
+            
+            var text ="";
+            $(".singlecheckbox:checked").each(function(){
+                
+                text+=$(this).val()+","
+                console.log(text)
+            });
+            $("#singlecheckbox").val(text)
+        })
+    })
+    
+</script>
+
+
+
+{% for i in messages %}
+<script>
+    alert('{{i}}')
+</script>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,291 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<style>
+    .required:after {
+        content: " *";
+        color: red;
+    }
+</style>
+
+<title>Smart Tracking System- Create New Sampling</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Calender Activity
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-success" href="" role="button">Import</a>
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- Create New Sampling</title>
+        <div class="card-body">
+            <form
+                action="{% if vendor_request %}/change_vendor_request/{{vendor_request.id}}/{% else %}/add_vendor_request/{% endif %}"
+                method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="required ">Vendor Name</label>
+                            <input class="form-control" id="vendor_name" name="vendor_name" type="text"
+                                placeholder="Vendor Name" value="{{vendor_request.vendor_name}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Owner Name</label>
+                            <input class="form-control" id="vendor_owner" name="vendor_owner" type="text"
+                                placeholder="Owner Name" value="{{vendor_request.vendor_owner}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Owner Email</label>
+                            <input class="form-control" id="vendor_email" name="vendor_email" type="email"
+                                placeholder="Owner Email" value="{{vendor_request.vendor_email}}" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Owner Contact</label>
+                            <input class="form-control" id="vendor_contact" name="vendor_contact" type="text"
+                                placeholder="Owner Contact" value="{{vendor_request.vendor_contact}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Owner Address</label>
+                            <input class="form-control" id="vendor_address" name="vendor_address" type="text"
+                                placeholder="Owner Address" value="{{vendor_request.vendor_address}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="required">Vendor City</label>
+                            <select class="form-control" id="vendor_city" name="vendor_city">
+                                <option value="0">--Select City--</option>
+                                {% for i in city %}
+                                
+                                <option value="{{i.0}}"{% if vendor_request.vendor_city == i.0 %}selected{% endif %}>{{i.1}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="required">Vendor State</label>
+                            <select class="form-control" id="vendor_state" name="vendor_state">
+                                <option value="0">--Select State--</option>
+                                {% for i in state %}
+                                <option value="{{i.0}}"{% if vendor_request.vendor_city == i.0 %}selected{% endif %}>{{i.1}}
+                                    
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="required">Factory</label>
+                            <!-- <select class="form-control" id="factory" name="factory"> -->
+                                <!-- <option value="0">--Select Factory Name--</option> -->
+                                <input class="form-control" id="factory_name" name="factory_name" type="text"
+                                placeholder="Owner Name" value="{{vendor_request.factory_name}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                                <!-- {% for i in factory %}
+                                <option value="{{i.id}}"{% if vendor_request.factory == i.id %}selected{% endif %}>{{i.factory_name}}
+                                    </option>
+                                {% endfor %} -->
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Factory Name/ Packaging Unit</label>
+                            <input class="form-control" id="factory_name" name="factory_name" type="text"
+                                placeholder="Owner Name" value="{{vendor_request.factory_name}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div> -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="required">Factory Type</label>
+                            <select class="form-control" id="factory_type" name="factory_type">
+                                <option value="0">--Select Factory Name--</option>
+                                {% for i in FACTORY_TYPE %}
+                                <option value="{{i.0}}"{% if vendor_request.factory_type == i.0 %}selected {% endif %}>{{i.1}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Factory / Packaging Unit Address</label>
+                            <input class="form-control" id="factory_address" name="factory_address" type="text"
+                                placeholder="Factory Address" value="{{vendor_request.factory_address}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Factory / Packaging Unit Contact Name</label>
+                            <input class="form-control" id="factory_contact" name="factory_contact" type="text"
+                                placeholder="Owner Contact" value="{{vendor_request.owner_contact}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Contact Email</label>
+                            <input class="form-control" id="factory_email" name="factory_email" type="email"
+                                placeholder="Factory Email" value="{{vendor_request.owner_contact}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="required">Factory City</label>
+                            <select class="form-control" id="factory_city" name="factory_city">
+                                <option value="0">--Select City--</option>
+                                {% for i in city %}
+                                
+                                <option value="{{i.0}}"{% if vendor_request.factory_city == i.0 %}selected{% endif %}>{{i.1}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="required">Factory State</label>
+                            <select class="form-control" id="factory_state" name="factory_state">
+                                <option value="0">--Select State--</option>
+                                {% for i in state %}
+                                <option value="{{i.0}}"{% if vendor_request.factory_city == i.0 %}selected{% endif %}>{{i.1}}
+                                    
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Factory Pan No</label>
+                            <input class="form-control" id="factory_pan" name="factory_pan" type="text"
+                                placeholder="Factory Pan" value="{{vendor_request.factory_pan}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="required">Factory GST No</label>
+                            <input class="form-control" id="factory_gst" name="factory_gst" type="text"
+                                placeholder="Factory GST" value="{{vendor_request.factory_gst}}"
+                                onkeyup="this.value = this.value.toUpperCase();" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="required">Master Category</label>
+                            <select class="form-control" id="master_category" name="master_category">
+                                <option value="0">--Select State--</option>
+                                {% for i in MASTER_CATEGORY %}
+                                <option value="{{i.0}}" {% if vendor_request.master_category == i.0 %}selected {% endif %}>{{i.1}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="required">Region</label>
+                            <select class="form-control" id="region" name="region">
+                                <option value="0">--Select State--</option>
+                                {% for i in REGION %}
+                                <option value="{{i.0}}"{% if vendor_request.region == i.0 %} selected{% endif %}>{{i.1}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="required ">Brand Name</label>
+                            <select class="form-control select2" id="brand" name="brand">
+                                <option value="0">--Select Brand--</option>
+                                {% for i in brand %}
+                                <option value="{{i.id}}"{% if vendor_request.brand == i.id %} selected{% endif %}>{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="required">Article Type</label>
+                            <select class="form-control" id="region" name="region">
+                                <option value="0">--Select State--</option>
+                                {% for i in REGION %}
+                                <option value="{{i.0}}"{% if vendor_request.region == i.0 %} selected{% endif %}>{{i.1}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="required">Division</label>
+                            <select class="form-control" id="region" name="region">
+                                <option value="0">--Select State--</option>
+                                {% for i in REGION %}
+                                <option value="{{i.0}}"{% if vendor_request.region == i.0 %} selected{% endif %}>{{i.1}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div> 
+                </div>
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if add_vendor_request %}Update Update Request{% else %}Add Request{% endif %}">
+                </div>
+
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.css">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
+
+    <script type="text/javascript">
+        // alert("loaded")
+        $(".select2").select2({ multiple: true });
+    </script>
+
+    {% endfor %}
+    {% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Smart Tracking System- Create New Sampling</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Import Assortment
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-success" href="{% url 'import_assortment' %}" role="button">Import</a>
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- Create New Sampling</title>
+        <div class="card-body">
+            <form action="{% if techpack %}/change_techpack/{{techpack.id}}/{% else %}/add_techpack/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Import Assortment</label>
+                            <input class="form-control" id="file" name="techpack"  type="file" placeholder="Activity Name" value="{{calender.end_date|date:'Y-m-d'}}" onkeyup="this.value = this.value.toUpperCase();" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if techpack %}Import{% else %}Upload Techpack{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

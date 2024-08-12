@@ -1,0 +1,92 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Activity Details
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-primary" href="{% url 'add_vendor_request' %}" role="button">Add New Request</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Vendor Name</th>
+                            <th>Owner Name</th>
+                            <th>Owner Email</th>
+                            <th>Owner Contact</th>
+                            <th>Owner Address</th>
+                            <th>Vendor City</th>
+                            <th>Vendor State</th>
+                            <th>Factory</th>
+                            <th>Factory Name</th>
+                            <th>Factory Type</th>
+                            <th>Factory Address</th>
+                            <th>Factory Contact Name</th>
+                            <th>Factory Contact No</th>
+                            <th>Factory Contact Email</th>
+                            <th>Factory City</th>
+                            <th>Factory State</th>
+                            <th>Vendor Pan</th>
+                            <th>Vendor GST</th>
+                            <th>Master Category</th>
+                            <th>Region</th>
+                            <th>View</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    {% for i in avl %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.vendor_name}}</td>
+                        <td>{{i.vendor_owner}}</td>
+                        <td>{{i.vendor_email}}</td>
+                        <td>{{i.vendor_contact}}</td>
+                        <td>{{i.vendor_address}}</td>
+                        <td>{{i.get_vendor_city_display}}</td>
+                        <td>{{i.vendor_state}}</td>
+                        <td>{{i.factory_name}}</td>
+                        <td>{{i.factory_name}}</td>
+                        <td>{{i.factory_type}}</td>
+                        <td>{{i.factory_address}}</td>
+                        <td>{{i.factory_email}}</td>
+                        <td>{{i.factory_contact}}</td>
+                        <td>{{i.factory_address}}</td>
+                        <td>{{i.factory_city}}</td>
+                        <td>{{i.factory_state}}</td>
+                        <td>{{i.factory_pan}}</td>
+                        <td>{{i.factory_gst}}</td>
+                        <td>{{i.master_category}}</td>
+                        <td>{{i.region}}</td>
+                        <td>
+                            <a href="/change_vendor_form/{{i.id}}/"><i class="fa fa-eye fa-1x" aria-hidden="true"></i></a>
+                        </td>
+                        <td>
+                            <a href="/change_vendor_request/{{i.id}}/"><i class="fa fa-pencil fa-1x" aria-hidden="true"></i></a>
+                        </td>
+                        <td>
+                            <a href="/delete_vendor_request/{{i.id}}/"><button class="btn btn-danger">Delete</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% for i in messages %}
+<script>
+    alert('{{i}}')
+</script>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,143 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<html>
+<main>
+    <div class="container-fluid">
+        <!-- <h1 class="mt-4">Dashboard</h1> -->
+        <ol class="breadcrumb mb-4 mt-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">12,097,444</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">Total Inventory</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">60.98%</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">Rate of Sale</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">22.87%</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">Returns</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-info text-white mb-4">
+                    <div class="card-body">11,350,685</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">Under Production</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Dashboard
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Brand Name</th>
+                                <th>Total Inventory</th>
+                                <th>Rate of Sale</th>
+                                <th>Returns</th>
+                                <th>Under Production</th>
+                                <th>A.S.P</th>
+                                <th>A.P.P</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in om %}
+                            <tr>
+                                <td>{{i.brand}}</td>
+                                <td>{{i.total_inventory}}</td>
+                                <td>{{i.total_sale}}</td>
+                                <td>{{i.total_return}}</td>
+                                <td>{{i.under_production}}</td>
+                                <td>{{i.asp}}</td>
+                                <td>{{i.app}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area mr-1"></i>
+                        Average Purchase Price
+                    </div>
+                    <div class="card-body"><canvas id="barChart" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar mr-1"></i>
+                        Bar Chart Example
+                    </div>
+                    <div class="card-body"><canvas id="barChart" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    var ctx = document.getElementById("barChart").getContext('2d');
+    var barChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["SS-21", "SS-22", "AW-22", "SS-23"],
+        datasets: [{
+          label: 'data-1',
+          data: [12, 19, 3, 17],
+          backgroundColor: ["red", "blue","yellow", "green"]
+        }]
+      },
+      options: {
+        responsive: false,
+      }
+    });
+  </script>
+  <script>
+    var ctx = document.getElementById("mbarChart").getContext('2d');
+    var barChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["SS-21", "SS-22", "AW-22", "SS-23"],
+        datasets: [{
+          label: 'Price',
+          data: [520, 510, 490, 510, 480],
+          backgroundColor: ["red", "blue","yellow", "green"]
+        }]
+      },
+      options: {
+        responsive: false,
+      }
+    });
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+{% endblock content %}

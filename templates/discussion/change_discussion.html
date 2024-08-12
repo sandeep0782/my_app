@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Smart Tracking System- Create New Sampling</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Details
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-success" href="" role="button">Import</a>
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- Create New Sampling</title>
+        <div class="card-body">
+            <form action="" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Details Name</label>
+                            <input class="form-control" id="color_name" name="name"  type="text" placeholder="Activity Name" value="{{detail.name}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Phone</label>
+                            <input class="form-control" id="color_name" name="phone"  type="text" placeholder="Phone No" value="{{detail.phone}}"  required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Email</label>
+                            <input class="form-control" id="color_name" name="email"  type="email" placeholder="Email" value="{{detail.email}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Address</label>
+                            <input class="form-control" id="color_name" name="address"  type="text" placeholder="Activity Name" value="{{detail.address}}" onkeyup="this.value = this.value.toUpperCase();"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>City</label>
+                            <input class="form-control" id="color_name" name="city"  type="text" placeholder="City" value="{{detail.city}}" onkeyup="this.value = this.value.toUpperCase();" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Pin</label>
+                            <input class="form-control" id="color_name" name="pin"  type="text" placeholder="Pin" value="{{detail.pin}}" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if detail %}Update Discussion{% else %}Add Discussion{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock content %}

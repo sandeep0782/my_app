@@ -1,0 +1,105 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<main>
+    <div class="container-fluid">
+        <!-- <h1 class="mt-4">Dashboard</h1> -->
+        <ol class="breadcrumb mb-4 mt-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <!-- <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Primary Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">Warning Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Success Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Danger Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-9">
+                        <i class="fas fa-table mr-1"></i>
+                        OTB Details
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <a class="btn btn-primary" href="{% url 'add_otb' %}" role="button">Add OTB</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Brand Name</th>
+                                <th>Season</th>
+                                <th>Drop</th>
+                                <th>Article Type</th>
+                                <th>Total OTB Value </th>
+                                <th>OTB Consumed (INR)</th>
+                                <th>OTB Balance (INR)</th>
+                                <th>Update</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in otb %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.brand}}</td>
+                                <td>{{i.season}}</td>
+                                <td>{{i.drop}}</td>
+                                <td>{{i.article_type}}</td>
+                                <td>{{i.otb_value}}</td>
+                                <td>{{i.otb_consumed}}</td>
+                                <td>{{i.otb_balance}}</td>
+                                <td>
+                                    <a href="/change_otb/{{i.id}}/"><button class="btn btn-success">Edit</button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% for i in messages %}
+<script>
+    alert('{{i}}')
+</script>
+{% endfor %}
+{% endblock content %}

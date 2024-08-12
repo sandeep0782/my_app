@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Create New Buyer</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Add Department
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="{% if department %}/change_department/{{department.id}}/{% else %}/add_department/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Department Name</label>
+                            <input class="form-control" id="name" name="name"  type="text" placeholder="Department Name" value="{{department.name}}"  required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Department Description</label>
+                            <input class="form-control" id="name" name="desc"  type="text" placeholder="Department Description" value="{{department.desc}}" required/>                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if buyer %}Update Department{% else %}Add Department{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

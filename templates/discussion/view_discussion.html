@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Discussion
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-primary" href="{% url 'add_discussion' %}" role="button">Add New Discussion</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Details Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Pin</th>
+                            <th>Status</th>
+                            <th>Add New Details</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+
+                        </tr>
+                    </thead>
+                    {% for i in discussion %}
+                    <tr {% if i.dis_status == "Close" %}style="background-color:#fff2cc"{% endif %}>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="{% url 'view_details' i.id %}">{{i.name}}</a></td>
+                        <td>{{i.phone}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.address}}</td>
+                        <td>{{i.city}}</td>
+                        <td>{{i.pin}}</td>
+                        <td>{{i.get_dis_status_display}}</td>
+                        <td>
+                            <a href="/add_details/{{i.id}}/"><button class="btn btn-primary">Add Details</button></a>
+                        </td>
+                        <td>
+                            <a href="/change_discussion/{{i.id}}/"><button class="btn btn-success">Edit</button></a>
+                        </td>
+                        <td>
+                            <a href="/delete_discussion/{{i.id}}/"><button class="btn btn-danger">Delete</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% for i in messages %}
+<script>
+    alert('{{i}}')
+</script>
+{% endfor %}
+{% endblock content %}

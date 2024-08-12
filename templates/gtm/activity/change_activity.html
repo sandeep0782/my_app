@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Smart Tracking System- Create New Sampling</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Calender Activity
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-success" href="" role="button">Import</a>
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- Create New Sampling</title>
+        <div class="card-body">
+            <form action="{% if activity %}/change_activity/{{activity.id}}/{% else %}/add_activity/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-8">
+                        <div class="form-group ">
+                            <label>Activity Name</label>
+                            <input class="form-control" id="color_name" name="name"  type="text" placeholder="Activity Name" value="{{activity.name}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select class="form-control" id="buyer" name="department_name">
+                                <option value = "0">-----------</option>
+                                {% for i in buyer %}
+                                <!-- <option value="{{i.id}}">{{i.name}} -->
+                                    <option value="{{i.id}}"{% if activity.id == i.id %}selected{% endif %}>{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if activity %}Update Activity{% else %}Add Activity{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

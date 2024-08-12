@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Calender Details
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-primary" href="{% url 'add_calender' %}" role="button">Add New Calender</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Buyer</th>
+                            <th>Activity Name</th>
+                            <th>Season</th>
+                            <th>Drop</th>
+                            <th>Order Type</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Update</th>
+                            <th>Approval</th>
+                            
+                        </tr>
+                    </thead>
+                    {% for i in calender %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.buyer}}</td>
+                        <td>{{i.activity_name}}</td>
+                        <td>{{i.season}}</td>
+                        <td>{{i.drop}}</td>
+                        <td>{{i.order_type}}</td>
+                        <td>{{i.start_date}}</td>
+                        <td>{{i.end_date}}</td>
+                        <td>
+                            <a href="/change_calender/{{i.id}}/"><button class="btn btn-success">Edit</button></a>
+                        </td>
+                        <td>
+                            <a href="/calender/cal_home/{{i.activity_name.id}}/"><button class="btn btn-success">Approve</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% for i in messages %}
+<script>
+    alert('{{i}}')
+</script>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,78 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Costing Details
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-primary" href="{% url 'add_assortment' %}" role="button">New Assortment</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Brand Name</th>
+                            <th>Season</th>
+                            <th>Drop</th>
+                            <th>Gender</th>
+                            <th>Article Type</th>
+                            <th>Domestic/ Import</th>
+                            <th>Offline/ Online</th>
+                            <th>WW/Non WW</th>
+                            <th>Order Type</th>
+                            <th>Fabric Type</th>
+                            <th>Content-1</th>
+                            <th>Content-2</th>
+                            <th>Content-3</th>
+                            <th>Options</th>
+                            <th>Quantity</th>
+                            <th>Update</th>                           
+                            <th>Delete</th>                           
+                        </tr>
+                    </thead>
+                    {% for i in assortment %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.brand}}</td>
+                        <td>{{i.season}}</td>
+                        <td>{{i.drop}}</td>
+                        <td>{{i.gender}}</td>
+                        <td>{{i.article_type}}</td>
+                        <td>{{i.domimp}}</td>
+                        <td>{{i.onoff}}</td>
+                        <td>{{i.wwnww}}</td>
+                        <td>{{i.order_type}}</td>
+                        <td>{{i.fabric_type}}</td>
+                        <td>{{i.content1}}</td>
+                        <td>{{i.content2}}</td>
+                        <td>{{i.content3}}</td>
+                        <td>{{i.options}}</td>
+                        <td>{{i.quantity}}</td>
+                        <td>
+                            <a href="/change_assortment/{{i.id}}/"><button class="btn btn-success">Edit</button></a>
+                        </td>
+                        <td>
+                            <a href="/delete_assortment/{{i.id}}/"><button class="btn btn-danger">Delete</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% for i in messages %}
+<script>
+    alert('{{i}}')
+</script>
+{% endfor %}
+{% endblock content %}

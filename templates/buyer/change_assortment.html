@@ -1,0 +1,187 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Smart Tracking System- Create New Sampling</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Add Assortment
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-success" href="{% url 'import_assortment' %}" role="button">Import</a>
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- Create New Sampling</title>
+        <div class="card-body">
+            <form action="{% if assortment %}/change_assortment/{{assortment.id}}/{% else %}/add_assortment/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Brand name</label>
+                            <select class="form-control" id="brand" name="brand">
+                                <option value = "0">-----------</option>
+                                {% for i in buyer %}
+                                <option value="{{i.id}}"{% if assortment.brand.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Season</label>
+                            <select class="form-control" id="season" name="season">
+                                <option value = "0">-----------</option>
+                                {% for i in season %}
+                                <option value="{{i.id}}"{% if assortment.season.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Drop</label>
+                            <select class="form-control" id="drop" name="drop">
+                                <option value = "0">-----------</option>
+                                {% for i in drop %}
+                                <option value="{{i.id}}" {% if assortment.drop.id == i.id %}selected{% endif %}>{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value = "0">-----------</option>
+                                {% for i in gender %}
+                                <option value="{{i.id}}"{% if assortment.gender.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Article Type</label>
+                            <select class="form-control" id="article_type" name="article_type">
+                                <option value = "0">-----------</option>
+                                {% for i in article_type %}
+                                <option value="{{i.id}}"{% if assortment.article_type.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Dom/ Imp</label>
+                            <select class="form-control" id="domimp" name="domimp">
+                                <option value = "0">-----------</option>
+                                {% for i in domimp %}
+                                <option value="{{i.id}}"{% if assortment.domimp.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Offline/ Online</label>
+                            <select class="form-control" id="offonn" name="offonn">
+                                <option value = "0">-----------</option>
+                                {% for i in offonn %}
+                                <option value="{{i.id}}"{% if assortment.onoff.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>WW/Nww</label>
+                            <select class="form-control" id="wwnww" name="wwnww">
+                                <option value = "0">-----------</option>
+                                {% for i in wwnww %}
+                                <option value="{{i.id}}"{% if assortment.wwnww.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Order Type</label>
+                            <select class="form-control" id="order_type" name="order_type">
+                                <option value = "0">-----------</option>
+                                {% for i in order_type %}
+                                <option value="{{i.id}}"{% if assortment.order_type.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Fabric Type</label>
+                            <select class="form-control" id="fabric_type" name="fabric_type">
+                                <option value = "0">-----------</option>
+                                {% for i in fabric_type %}
+                                <option value="{{i.id}}"{% if assortment.fabric_type.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Options</label>
+                            <div class="form-group">
+                                <input class="form-control" id="options" name="options"  type="number" placeholder="NO of Options" value="{{assortment.options}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input class="form-control" id="quantity" name="quantity"  type="number" placeholder="Quantity" value="{{assortment.quantity}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Content-1</label>
+                            <input class="form-control" id="start_date" name="start_date"  type="text" placeholder="Activity Name" value="{{calender.start_date|date:'Y-m-d'}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Content-2</label>
+                            <input class="form-control" id="end_date" name="end_date"  type="text" placeholder="Activity Name" value="{{calender.end_date|date:'Y-m-d'}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if assortment %}Update{% else %}Add Assortment{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

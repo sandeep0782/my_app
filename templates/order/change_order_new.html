@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="book_create">
+        {% csrf_token %}
+        {{formset.management_form}}
+        <table>
+            {% for form in formset %}
+                {% for field in form.visible_fields %}
+                <tr>
+                    <th>{{field.label_tag}}</th>
+                    <td>{{field}}</td>
+                </tr>
+               
+                {% endfor %}
+                
+            {% endfor %}
+            
+        </table>
+        <button type="submit">Save</button>
+    </form>
+    <button id="add-form">Add More</button>
+
+<script>
+    document.getElementById('add-form').addEventListener('click', function () { 
+        var formIdx = parseInt(document.getElementById('id_departments-TOTAL_FORMS').value);
+        console.log(formIdx)
+        var template = document.querySelector('#empty-form').innerHTML.replace(/__prefix__/g, formIdx);
+        console.log(template)
+        document.querySelector('table').insertAdjacentHTML('beforeend', template);
+        document.getElementById('id_departments-TOTAL_FORMS').value = formIdx + 1;
+    });
+</script>
+
+<script type="empty/form-template" id="empty-form">
+    <tr>
+        <th><label for="id_departments-__prefix__-quantity">Quality:</label></th>
+        <td><input type="text" name="departments-__prefix__-quality" id = "id_departments-__prefix__-name" </input></td>
+        
+    </tr>
+</script>
+    
+</body>
+</html>

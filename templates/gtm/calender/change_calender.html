@@ -1,0 +1,113 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Smart Tracking System- Create New Sampling</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Calender activity
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-success" href="" role="button">Import</a>
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- Create New Sampling</title>
+        <div class="card-body">
+            <form action="{% if calender %}/change_calender/{{calender.id}}/{% else %}/add_calender/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label>Activity Name</label>
+                            <!-- <input class="form-control" id="color_name" name="name"  type="text" placeholder="Activity Name" value="{{activity.name}}" onkeyup="this.value = this.value.toUpperCase();" required/> -->
+                            <select class="form-control" id="activity_name" name="activity_name">
+                                <option value = "0">-----------</option>
+                                {% for i in activity %}
+                                <option value="{{i.id}}"{% if calender.activity_name.id == i.id %}selected{% endif %}>{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Brand name</label>
+                            <select class="form-control" id="buyer" name="buyer">
+                                <option value = "0">-----------</option>
+                                {% for i in buyer %}
+                                <option value="{{i.id}}"{% if calender.buyer.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Fashion/ Repeat</label>
+                            <select class="form-control" id="order_type" name="order_type">
+                                <option value = "0">-----------</option>
+                                {% for i in order_type %}
+                                <option value="{{i.id}}"{% if calender.order_type.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Season</label>
+                            <select class="form-control" id="season" name="season">
+                                <option value = "0">-----------</option>
+                                {% for i in season %}
+                                <option value="{{i.id}}"{% if calender.season.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label>Drop</label>
+                            <select class="form-control" id="drop" name="drop">
+                                <option value = "0">-----------</option>
+                                {% for i in drop %}
+                                <option value="{{i.id}}" {% if calender.drop.id == i.id %}selected{% endif %}>{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Activity Start Date</label>
+                            <input class="form-control" id="start_date" name="start_date"  type="date" placeholder="Activity Name" value="{{calender.start_date|date:'Y-m-d'}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Activity End Date</label>
+                            <input class="form-control" id="end_date" name="end_date"  type="date" placeholder="Activity Name" value="{{calender.end_date|date:'Y-m-d'}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if calender %}Update{% else %}Add Calender{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

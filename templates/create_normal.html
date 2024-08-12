@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+   
+</head>
+<body>
+    <div class="container">
+        <h1>Dynamic Form</h1>
+        <div class="form-row d-flex gap-2">
+            <div class="col-lg-6">
+                <!-- <label for="">Name</label> -->
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-lg-1">
+                <button class="btn btn-primary" id="button">+</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script>
+        $( document ).ready(function(){
+            $('button').click(function(){
+                alert("ok")
+            })
+        })
+    </script>
+</body>
+</html>

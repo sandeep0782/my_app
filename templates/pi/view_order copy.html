@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<main>
+    <div class="container-fluid">
+        <!-- <h1 class="mt-4">Dashboard</h1> -->
+        <ol class="breadcrumb mb-4 mt-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <title>Smart Tracking System- View Order</title>
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-9">
+                        <i class="fas fa-table mr-1"></i>
+                        Order Details
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <a class="btn btn-primary" href="{% url 'add_order' %}" role="button">Add Order</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Order Date</th>
+                                <th>Buyer</th>
+                                <th>Season</th>
+                                <th>Drop</th>
+                                <th>Quality</th>
+                                <th>Quantity</th>
+                                <th>Price </th>
+                                <th>Value</th>
+                                <th>Del Date</th>
+                                <th>Status</th>
+                                <th>Pi</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in order %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.order_date|date:'d-m-Y'}}</td>
+                                <td>{{i.buyer}}</td>
+                                <td>{{i.season}}</td>
+                                <td>{{i.drop}}</td>
+                                <td>{{i.quality}}</td>
+                                <td>{{i.quantity}}</td>
+                                <td>{{i.price}}</td>
+                                <td>{{i.value}}</td>
+                                <td>{{i.buyer_del_date|date:'d-m-Y'}}</td>
+                                <td>{{i.status}}</td>
+                                <td>
+                                    <a href="/pi/{{i.id}}/"><button class="btn btn-warning">Edit</button></a>
+                                </td>
+                                <td>
+                                    <a href="/change_order/{{i.id}}/"><button class="btn btn-success">Edit</button></a>
+                                </td>
+                                <td>
+                                    <a href="/delete_order/{{i.id}}/"><button class="btn btn-danger">Delete</button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% for i in messages %}
+<script>
+    alert('{{i}}')
+</script>
+{% endfor %}
+{% endblock content %}

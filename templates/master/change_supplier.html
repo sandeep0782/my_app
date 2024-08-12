@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Smart Tracking System- Create New Sampling</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Add Supplier
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- Create New Sampling</title>
+        <div class="card-body">
+            <form action="{% if supplier %}/change_supplier/{{supplier.id}}/{% else %}/add_supplier/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Supplier Name</label>
+                            <input class="form-control" id="name" name="name"  type="text" placeholder="Supplier Name" value="{{supplier.name}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Supplier Description</label>
+                            <input class="form-control" id="name" name="desc"  type="text" placeholder="Supplier Description" value="{{supplier.desc}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if supplier %}Update Supplier{% else %}Add Supplier{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+<!-- {% load widget_tweaks %} -->
+{% block content %}
+
+{% load widget_tweaks %}
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Add Order
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="book_create" method="POST">
+                {% csrf_token %}
+                {{ formset.management_form }}
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Order No</label>
+                            <input type="text" class="form-control" name="order_no" placeholder="Order No" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Date</label>
+                            <input type="date" class="form-control"name="order_date" placeholder="Order Date" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Supplier</label>
+                            <!-- <input type="text" class="form-control"name="supplier" placeholder="Supplier Name" value="{order.supplier}"> -->
+                             <select name="supplier" id="" class="form-control">
+                                <option value = "0">-----------</option>
+                                {% for i in supplier %}
+                                <option value="{{i.id}}"{% if order.supplier.id == i.id %}selected{% endif %} >{{i.company}}
+                                </option>
+                                {% endfor %}
+                             </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Delivery Date</label>
+                            <input type="date" class="form-control"name="supplier_del_date" placeholder="Delivery Date" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Quality</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for form in formset %}
+                                    <tr>
+                                        <td> {% render_field form.quality placeholder="Name" class="form-control" %}
+                                        </td>
+                                        <td> {% render_field form.quantity placeholder="Quantity" class="form-control" %}
+                                        </td>
+                                        <td> {% render_field form.price placeholder="Price" class="form-control" %}
+                                        </td>
+                                        <td> {% render_field form.value placeholder="Value" class="form-control"disabled="disabled" %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <button class="btn btn-primary w-100" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,90 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<main>
+    <div class="container-fluid">
+        <!-- <h1 class="mt-4">Dashboard</h1> -->
+        <ol class="breadcrumb mb-4 mt-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <title>Smart Tracking System- View Order</title>
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-9">
+                        <i class="fas fa-table mr-1"></i>
+                        Order Details
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <a class="btn btn-primary" href="{% url 'add_order' %}" role="button">Add Order</a>
+                    </div>
+                </div>
+            </div>
+        <form action="/pi" method="post">
+            {% csrf_token %}   
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th><input class="" type="checkbox" id="all" name='all' ></th>
+                                <th>Id</th>
+                                <th>Order Date</th>
+                                <th>Pi No</th>
+                                <th>Order</th>
+                                <th>Value</th>
+                                <th>Supplier Del Date</th>
+                                <th>Buyer Del Date</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in pi %}
+                            <tr>
+                                <td><input class="singlecheckbox" type="checkbox" name="checkbox" value="{{i.id}}"></td>
+                                <td>{{i.id}}</td>
+                                <td>{{i.pi_date|date:'d-m-Y'}}</td>
+                                <td>{{i.pi_no}}</td>
+                                <td>{{i.order}}</td>
+                                <td>{{i.value}}</td>
+                                <td>{{i.supplier_del_date}}</td>
+                                <td>{{i.buyer_del_date}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <input type="text" class="" id="singlecheckbox" name = 'singlecheckbox'>
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form> 
+    </div>
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function(){
+        
+        $(".singlecheckbox").click(function(){
+            
+            var text ="";
+            $(".singlecheckbox:checked").each(function(){
+                
+                text+=$(this).val()+","
+                console.log(text)
+            });
+            $("#singlecheckbox").val(text)
+        })
+    })
+    
+</script>
+
+
+
+{% for i in messages %}
+<script>
+    alert('{{i}}')
+</script>
+{% endfor %}
+{% endblock content %}

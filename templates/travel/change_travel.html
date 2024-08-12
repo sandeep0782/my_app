@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Smart Tracking System- Create New Sampling</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Add Trip
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- Create New Sampling</title>
+        <div class="card-body">
+            <form action="{% if travel %}/change_travel/{{travel.id}}/{% else %}/add_travel/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="form-group ">
+                            <label>Requester Name</label>
+                            <input class="form-control" id="name" name="emp_name"  type="text" placeholder="Name" value="{{travel.employee_name}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <div class="form-group">
+                            <label>From</label>
+                            <input class="form-control" id="name" name="desc"  type="text" placeholder="Supplier Description" value="{{supplier.desc}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div> -->
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>From</label>
+                            <input class="form-control" id="from_city" name="from_city"  type="text" placeholder="City Name" value="{{travel.from_city}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>To</label>
+                            <input class="form-control" id="name" name="to_city"  type="text" placeholder="To City Name" value="{{travel.to_city}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Travel Start Date</label>
+                            <input class="form-control" id="name" name="start_date"  type="date" placeholder="Travel Start Date" value="{{travel.start_date}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Travel End Date</label>
+                            <input class="form-control" id="name" name="end_date"  type="date" placeholder="Travel End Date" value="{{travel.end_date}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if travel %}Update Trip{% else %}Add Trip{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}

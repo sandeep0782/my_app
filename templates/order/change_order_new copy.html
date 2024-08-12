@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<title>Add Order</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Add Order
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <form action="book_create" method="POST">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Value</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for form in formset %}
+                            <tr>
+                                <!-- <td>{{ form.buyer }}</td>
+                                <td>{{ form.quantity }}</td>
+                                <td>{{ form.price }}</td>
+                                <td>{{ form.value }}</td> -->
+                                <td>
+                                    {% render_field form.quality name="quality" class="form-control" placeholder="Buyer" type="text" %}
+                                </td>
+                                <td> 
+                                    {% render_field form.quantity name="quantity" class="form-control" placeholder="Quantity" type="number" %}
+                                </td>
+                                <td> 
+                                    {% render_field form.price name="price" class="form-control" placeholder="Price" type="number" %}
+                                </td>
+                                <td> 
+                                    {% render_field form.value name="value" class="form-control" placeholder="Value" type="number" %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

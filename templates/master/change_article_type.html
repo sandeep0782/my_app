@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<title>Smart Tracking System- Create New Sampling</title>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <i class="fas fa-table mr-1"></i>
+                    Add Article Type
+                </div>
+                <div class="col-md-3 text-right">
+                    <a class="btn btn-success" href="" role="button">Import</a>
+                </div>
+            </div>
+        </div>
+        <title>Smart Tracking System- Create New Sampling</title>
+        <div class="card-body">
+            <form action="{% if article_type %}/change_article_type/{{article_type.id}}/{% else %}/add_article_type/{% endif %}" method="post"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="form-group ">
+                            <label>Article Name</label>
+                            <input class="form-control" id="name" name="name"  type="text" placeholder="Article Name" value="{{article_type.name}}" onkeyup="this.value = this.value.toUpperCase();" required/>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value = "0">-----------</option>
+                                {% for i in gender %}
+                                <option value="{{i.id}}"{% if article_type.gender.id == i.id %}selected{% endif %} >{{i.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Abbrevative</label>
+                            <input class="form-control" id="name" name="desc"  type="text" placeholder="Abbrevative" value="{{season.desc}}" onkeyup="this.value = this.value.toUpperCase();" required/>                            
+                        </div>
+                    </div> -->
+                </div>
+
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block"
+                        value="{% if article_type %}Update Article Type{% else %}Add Article Type{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for i in messages %}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+    {% endblock %}
